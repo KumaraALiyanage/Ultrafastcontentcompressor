@@ -1,0 +1,21 @@
+import sys
+from subprocess import run
+from pathlib import Path
+
+def compress_video(video_file):
+    output_file = video_file.stem + '-compressed.mp4'
+    # Use a faster preset for compression
+    run(['ffmpeg', '-i', str(video_file), '-vcodec', 'h264', '-preset', 'ultrafast', '-acodec', 'aac', output_file])
+    print(f'Compressed video saved as: {output_file}')
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: python compress_video.py <video_file>")
+        sys.exit(1)
+
+    video_path = Path(sys.argv[1])
+    if not video_path.is_file():
+        print(f"Error: {video_path} is not a valid file.")
+        sys.exit(1)
+
+    compress_video(video_path)

@@ -1,0 +1,1 @@
+python compress_video.py path/to/your/video.mp4
